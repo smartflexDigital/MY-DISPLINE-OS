@@ -1,0 +1,18 @@
+{
+  "name": "MY DISCIPLINE OS",
+  "short_name": "Discipline OS",
+  "description": "Mfumo binafsi wa nidhamu, ratiba na maendeleo.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f4f6fa",
+  "theme_color": "#101827",
+  "lang": "sw",
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

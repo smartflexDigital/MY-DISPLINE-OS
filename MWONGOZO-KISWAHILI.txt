@@ -1,0 +1,50 @@
+MWONGOZO RAHISI — MY DISCIPLINE OS (TOLEO LENYE FOCUS TIMER)
+
+KUANZA BILA PYTHON
+1. Kwenye toleo la zamani, fungua Settings > Export JSON backup na uhifadhi faili la backup mahali salama.
+2. Pakua ZIP mpya, bonyeza kulia > Extract All. Fungua folda `my_discipline_os` iliyotolewa; usifungue mafaili ukiwa ndani ya ZIP.
+3. Fungua `index.html` kwa Microsoft Edge. Kama data haijaonekana yenyewe, fungua Settings > Import JSON, chagua backup uliyohifadhi, kisha thibitisha import.
+4. Usifute browser data wala kufuta nakala ya backup. Ukitumia browser ileile na anwani ileile, data kwa kawaida hubaki; backup hukusaidia kurejesha ukihamisha folda au browser.
+5. Kwa matumizi ya kawaida huhitaji Python wala internet. Browser notifications zinahitaji `localhost` au tovuti ya HTTPS; hazifanyi kazi kwa uhakika ukifungua `index.html` kama `file://`.
+
+KUCHAGUA MUDA WA FOCUS
+1. Fungua Focus Mode.
+2. Chagua 25, 45, 60 au 90 dakika; au chagua “Muda maalum…” kisha andika dakika 1 hadi 360 (saa 6).
+3. Bonyeza Anza focus. Chaguo la muda huhifadhiwa kwa matumizi yajayo.
+4. Muda ukiisha, alarm itatoa milio inayojirudia hadi ubonyeze “Simamisha alarm”. Ili kupata arifa ya browser, fungua Settings, weka tiki kwenye “Ruhusu browser notifications”, hifadhi, kisha chagua Allow/ruhusu kwenye ombi la browser.
+5. Weka sauti ya kifaa wazi. Acha ukurasa wa app wazi wakati timer inaendelea; browser inaweza kusitisha timer/arifa kifaa au browser ikilala au kufungwa.
+
+WINDOWS — NJIA YA LOCALHOST (kwa notifications)
+1. Fungua folda `my_discipline_os` iliyotolewa.
+2. Bonyeza sehemu ya anwani ya File Explorer, andika `cmd`, bonyeza Enter.
+3. Kwenye Command Prompt andika `py -m http.server 8000` na bonyeza Enter. Acha dirisha hilo wazi.
+4. Kwenye Edge fungua `http://localhost:8000`. Ruhusu notifications kwenye Settings za app.
+5. Ukimaliza, rudi Command Prompt na bonyeza Ctrl+C.
+Ikiwa `py` haijatambuliwa, fungua `index.html` moja kwa moja kwa matumizi ya timer na sauti; localhost si lazima kwa kazi zote.
+
+ANDROID BAADAYE
+1. Tumia toleo lililowekwa kwenye tovuti ya HTTPS (si faili la ZIP wala file://). Unaweza mwenyewe kuweka faili hizi kwenye hosting tuli inayotoa HTTPS.
+2. Fungua anwani hiyo kwa Chrome kwenye Android, kisha ruhusu notifications ikiombwa.
+3. Kwenye menyu ya Chrome chagua “Install app” au “Add to Home screen” ikiwa chaguo hilo lipo.
+4. Data ileile kwenye vifaa inahitaji Supabase. Fungua supabase.com, tengeneza project, kisha nakili Project URL na Publishable key kutoka Project Settings > API Keys.
+5. Fungua Supabase > SQL Editor, nakili SQL yote kutoka `supabase-schema.sql`, paste, kisha bonyeza Run. Jedwali na sera za faragha (RLS) zitawekwa.
+6. Fungua `cloud-config.js` kwa Notepad. Weka URL kati ya alama za nukuu kwenye `url`, na Publishable key kwenye `publishableKey`; save kabla ya ku-upload mafaili.
+7. Usitumie `secret`/`service_role` key kwenye browser wala kuituma kwa mtu. Publishable key ni ya browser; RLS ndiyo inayofunga data kwa akaunti husika.
+8. Upload mafaili yote ya folda `my_discipline_os` kwenye hosting ya HTTPS. Supabase Auth URL Configuration: weka anwani hiyo kama Site URL na Redirect URL inayoruhusiwa.
+9. Fungua tovuti, chagua “Tengeneza mpya”, tumia email yako, thibitisha email ikitumwa kisha ingia. Kwenye kifaa cha kwanza chagua data ya browser kupakiwa au kutumia cloud. Vifaa vingine viingie kwa email/nenosiri hilo hilo.
+10. Ikiwa data ya zamani iko browser/folda tofauti, export JSON kutoka app ya zamani, ingia kwenye toleo jipya, kisha Settings > Import backup. Import itapakiwa cloud.
+11. Mabadiliko husawazishwa kiotomatiki. Vifaa viwili vikibadilisha data kwa wakati mmoja, app itauliza ni nakala ipi ihifadhiwe. Endelea kufanya export JSON kama backup ya ziada.
+12. Android inaweza kuzuia timer ikiwa app imelala au imefungwa; alarm hii si alarm ya mfumo inayohakikishwa nyuma ya pazia.
+
+KAMA SEHEMU YA KATI NI TUPU
+- Hakikisha umefungua index.html iliyo ndani ya folda my_discipline_os, si index.html nyingine.
+- Hakikisha ZIP imetolewa kikamilifu, kisha fungua index.html kwa Microsoft Edge.
+- Kama bado ni tupu: Edge ikiwa wazi, bonyeza F12, chagua Console, piga picha ya ujumbe mwekundu na unitumie ili niweze kutafuta kosa halisi.
+
+KUANGALIA KAMA PYTHON IPO (SI LAZIMA KWA PROGRAMU HII)
+1. Fungua Start, andika cmd, kisha fungua Command Prompt.
+2. Andika py --version kisha bonyeza Enter.
+3. Ikiwa inaonyesha Python 3 pamoja na namba ya toleo, Python ipo. Ikiwa inasema haijatambuliwa au inafungua Microsoft Store, huenda Python haijawekwa au haijaunganishwa kwenye PATH. Huhitaji Python ili kutumia MY DISCIPLINE OS.
+
+KUMBUKA
+MY DISCIPLINE OS ni programu ya browser. Service worker, PWA na ruhusa za notifications huhitaji localhost au HTTPS. Data huhifadhiwa kwenye browser na kifaa hiki pekee.

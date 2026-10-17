@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="sw">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="MY DISCIPLINE OS — mfumo binafsi wa nidhamu, ratiba na maendeleo.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <title>MY DISCIPLINE OS</title>
+</head>
+<body>
+  <div id="authScreen" class="auth-screen hidden" aria-live="polite"></div>
+  <div class="app-shell" id="appShell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><span class="brand-mark">M</span><div><strong>MY DISCIPLINE</strong><small>OPERATING SYSTEM</small></div></div>
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="nav">
+        <button class="nav-item active" data-view="dashboard"><span>◫</span> Dashboard</button>
+        <button class="nav-item" data-view="schedule"><span>▦</span> Ratiba</button>
+        <button class="nav-item" data-view="tasks"><span>☑</span> Tasks</button>
+        <button class="nav-item" data-view="focus"><span>◷</span> Focus mode</button>
+        <button class="nav-item" data-view="projects"><span>◇</span> Miradi</button>
+        <button class="nav-item" data-view="study"><span>▤</span> Masomo</button>
+        <button class="nav-item" data-view="business"><span>↗</span> Biashara</button>
+        <button class="nav-item" data-view="reviews"><span>✧</span> Tathmini</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="streak-mini"><span>✦</span><div><strong id="sidebarStreak">0 day streak</strong><small>Endelea hatua kwa hatua</small></div></div>
+        <button class="nav-item" data-view="settings"><span>⚙</span> Settings</button>
+        <div class="sidebar-foot">MY DISCIPLINE OS <span>v1.0 MVP</span></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" id="menuBtn" aria-label="Fungua menyu">☰</button>
+        <div class="breadcrumb"><span>WORKSPACE</span><b>/</b><strong id="viewName">Dashboard</strong></div>
+        <div class="top-actions">
+          <span class="date-chip" id="topDate"></span>
+          <span id="cloudStatus" class="cloud-status hidden">Local</span>
+          <button class="btn small hidden" id="cloudSignOut" type="button">Toka</button>
+          <button class="icon-btn" id="themeBtn" title="Badilisha mwonekano" aria-label="Badilisha mwonekano">☼</button>
+          <button class="avatar" id="settingsShortcut" title="Settings">H</button>
+        </div>
+      </header>
+      <div id="appContent" class="content" aria-live="polite"><div class="card"><strong>Dashboard inapakia…</strong><p>Subiri kidogo. Ikiwa ujumbe huu hautabadilika, angalia JavaScript na fungua tena index.html kwa Microsoft Edge.</p></div></div>
+      <footer class="app-footer"><span>MY DISCIPLINE OS</span><span>Hatua ndogo. Maendeleo ya kweli.</span></footer>
+    </main>
+  </div>
+  <input type="file" id="importFile" accept="application/json,.json" hidden>
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <dialog id="modal" class="modal"><div id="modalContent"></div></dialog>
+  <script>
+    window.addEventListener("error", function (event) {
+      const area = document.getElementById("appContent");
+      if (!area) return;
+      area.innerHTML = "<div class=\"card\" role=\"alert\"><h2>Programu haikuanza vizuri</h2><p>Hakikisha app.js ipo pamoja na index.html. Bonyeza F12 kisha Console ili kuona maelezo ya kosa.</p><pre id=\"startupError\" style=\"white-space:pre-wrap\"></pre></div>";
+      const details = document.getElementById("startupError");
+      if (details) details.textContent = event.message || "JavaScript haikuweza kupakiwa.";
+    }, true);
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="cloud-config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+
+
+
