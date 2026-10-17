@@ -87,12 +87,24 @@
     }catch(error){authMessage(error.message||"Imeshindikana kuingia. Hakiki email na nenosiri.");}
     finally{if($("#authSubmit")){button.disabled=false;button.textContent=cloud.authMode==="signup"?"Tengeneza akaunti":"Ingia";}}
   }
+  function loadSupabaseSDK(){
+    if(window.supabase?.createClient)return Promise.resolve();
+    return new Promise((resolve,reject)=>{
+      const script=document.createElement("script");
+      const timeout=setTimeout(()=>{script.remove();reject(new Error("Muda umeisha kusubiri Supabase CDN."));},12000);
+      script.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+      script.async=true;
+      script.onload=()=>{clearTimeout(timeout);window.supabase?.createClient?resolve():reject(new Error("Supabase SDK haikupatikana baada ya kupakia."));};
+      script.onerror=()=>{clearTimeout(timeout);reject(new Error("Supabase CDN haikupatikana. Angalia internet."));};
+      document.head.append(script);
+    });
+  }
   async function bootCloud(){
     const url=String(cloudConfig.url||"").trim(),key=String(cloudConfig.publishableKey||"").trim();
     if(!url&&!key){cloud.enabled=false;save(false);render();return;}
     cloud.enabled=true;cloud.authMode="signin";
     if(!url||!key){renderAuth("Weka Project URL na Publishable key zote mbili ndani ya cloud-config.js.");return;}
-    if(!window.supabase?.createClient){renderAuth("SDK haikupatikana. Hakiki internet kisha refresh, au tumia bila cloud.");return;}
+    if(!window.supabase?.createClient){renderAuth("Inaunganisha Supabase…",true);try{await loadSupabaseSDK();}catch(error){renderAuth((error.message||"SDK haikupatikana.")+" Unaweza kutumia app kwenye kifaa hiki pekee, au refresh ukipata internet.");return;}}
     renderAuth("Inaangalia login…",true);
     try{
       cloud.client=window.supabase.createClient(url,key);
