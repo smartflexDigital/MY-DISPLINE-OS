@@ -152,7 +152,7 @@
     if(upload){cloud.localDirty=true;await syncWorkspace();}
   }
   function updateCloudChrome(){
-    const status=$("#cloudStatus"),logout=$("#cloudSignOut");if(status){status.hidden=!cloud.user||!cloud.ready;status.textContent=cloud.syncError?"Sync hitilafu · imehifadhiwa hapa":cloud.localDirty?"Inasawazisha…":"Cloud ✓";status.title=cloud.user?.email||"";}if(logout)logout.hidden=!cloud.user||!cloud.ready;
+    const status=$("#cloudStatus"),logout=$("#cloudSignOut"),signedIn=!!cloud.user&&cloud.ready;if(status){setElementHidden("#cloudStatus",!signedIn);status.textContent=cloud.syncError?"Sync hitilafu · imehifadhiwa hapa":cloud.localDirty?"Inasawazisha…":"Cloud ✓";status.title=cloud.user?.email||"";}setElementHidden("#cloudSignOut",!signedIn);
   }
   async function syncWorkspace(){
     if(!cloud.user||!cloud.ready||!cloud.client)return;

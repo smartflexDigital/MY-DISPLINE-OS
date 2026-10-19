@@ -1,4 +1,4 @@
-const CACHE = "my-discipline-os-v6";
+const CACHE = "my-discipline-os-v7";
 const CORE = ["./", "./index.html", "./styles.css", "./app.js", "./manifest.webmanifest", "./cloud-config.js", "./icons/icon.svg"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE)).then(() => self.skipWaiting()));
