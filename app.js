@@ -64,8 +64,12 @@
     const normalize=v=>Array.isArray(v)?v.map(normalize):v&&typeof v==="object"?Object.keys(v).sort().reduce((o,k)=>(o[k]=normalize(v[k]),o),{}):v;
     return JSON.stringify(normalize(value));
   }
+  function setElementHidden(selector,hidden){
+    const element=$(selector);if(!element)return;
+    element.hidden=hidden;element.classList.toggle("hidden",hidden);
+  }
   function renderAuth(message="",loading=false){
-    $("#appShell").hidden=true;$("#authScreen").hidden=false;
+    setElementHidden("#appShell",true);setElementHidden("#authScreen",false);
     const configured=!!(String(cloudConfig.url||"").trim()&&String(cloudConfig.publishableKey||"").trim());
     if(loading){$("#authScreen").innerHTML=`<section class="auth-card"><div class="brand-mark">M</div><h1>MY DISCIPLINE OS</h1><p>${esc(message||"Inaunganisha akaunti yako…")}</p></section>`;return;}
     const signup=cloud.authMode==="signup";
@@ -144,7 +148,7 @@
   }
   async function finishWorkspace(workspace,upload,revision=0){
     data=migrate(workspace);cloud.revision=Number(revision)||0;localStorage.setItem(KEY+".cloudUser",cloud.user.id);save(false);cloud.ready=true;cloud.lastCloudJSON=stableStringify(data);cloud.localDirty=false;cloud.syncError=false;
-    $("#authScreen").hidden=true;$("#appShell").hidden=false;render();updateCloudChrome();subscribeWorkspace();
+    setElementHidden("#authScreen",true);setElementHidden("#appShell",false);render();updateCloudChrome();subscribeWorkspace();
     if(upload){cloud.localDirty=true;await syncWorkspace();}
   }
   function updateCloudChrome(){
@@ -188,7 +192,7 @@
     $("#useOtherDevice").addEventListener("click",()=>{cloud.conflictOpen=false;const latest=cloud.pendingRemote||remote,latestRevision=cloud.pendingRemoteRevision||revision;cloud.pendingRemote=null;cloud.pendingRemoteRevision=0;$("#modal").close();applyRemoteWorkspace(latest,latestRevision);});
   }
   async function signOutCloud(){if(!cloud.client)return;if(cloud.localDirty)await syncWorkspace();const {error}=await cloud.client.auth.signOut();if(error)toast("Imeshindwa kutoka: "+error.message);}
-  function useLocalOnly(){cloud.localOnly=true;cloud.enabled=false;cloud.user=null;cloud.ready=false;if(cloud.client)cloud.client.auth.signOut().catch(()=>{});$("#authScreen").hidden=true;$("#appShell").hidden=false;render();toast("Unatumia data ya browser hii tu; cloud sync haipo.");}
+  function useLocalOnly(){cloud.localOnly=true;cloud.enabled=false;cloud.user=null;cloud.ready=false;if(cloud.client)cloud.client.auth.signOut().catch(()=>{});setElementHidden("#authScreen",true);setElementHidden("#appShell",false);render();toast("Unatumia data ya browser hii tu; cloud sync haipo.");}
   function toast(message){
     const el=document.createElement("div"); el.className="toast"; el.textContent=message; $("#toastRegion").append(el);
     setTimeout(()=>el.remove(),3500);
